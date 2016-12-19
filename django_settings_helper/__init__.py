@@ -10,7 +10,7 @@ except ImportError:
 from importlib import import_module
 from re import compile as re_compile
 
-var_expr = re_compile(r'export\s(?P<key>.+?)=("|\')?(?P<value>.+?)("|\')?\s*')
+var_expr = re_compile(r'^\s*export\s(?P<key>.+?)=((\"|\')?)(?P<val>.+?)((\"|\')?)\s*#[^#]*$')
 
 
 def get_env(key, strict=False, default=None, type_cast=str):
@@ -32,8 +32,8 @@ def env_from_file(path):
             matched = var_expr.search(line)
             if not matched:
                 continue
-            key = matched.groupdict('key')
-            val = matched.groupdict('value')
+            key = matched.groupdict().get('key')
+            val = matched.groupdict().get('val')
             if key and val:
                 os.environ.setdefault(key, val)
 
