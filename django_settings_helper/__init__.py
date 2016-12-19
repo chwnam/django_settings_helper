@@ -35,7 +35,7 @@ def env_from_file(path):
             if not matched:
                 continue
             groups = matched.groupdict()
-            key = matched.groupdict().get('key')
+            key = matched.groupdict().get('k')
             val = groups.get('v1') or groups.get('v2') or groups.get('v3')
             if key and val:
                 os.environ.setdefault(key, val)
