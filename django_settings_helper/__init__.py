@@ -11,7 +11,7 @@ from importlib import import_module
 from re import compile as re_compile
 
 var_expr = re_compile(
-    r'\s*export\s+(?P<k>.+?)=(((?=\")(?P<v1>.+)(?<=\"))|((?=\')(?P<v2>.+)(?<=\'))|(?P<v3>.+?))\s*(?=#)(?P<c>.*)$'
+    r'\s*export\s+(?P<k>.+?)=(((?=\")(?P<v1>.+)(?<=\"))|((?=\')(?P<v2>.+)(?<=\'))|(?P<v3>.+?))\s*((?=#)(?P<c>.*))?$'
 )
 
 
