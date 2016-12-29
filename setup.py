@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 setup(
     name='django_settings_helper',
 
-    version='1.0.0',
+    version='1.0.1',
 
     url='https://github.com/chwnam/django_settings_helper',
 
@@ -12,7 +12,7 @@ setup(
 
     author_email='ep6tri@hotmail.com',
 
-    description='',
+    description='A simple django\'s settings value helper',
 
     long_description='',
 
