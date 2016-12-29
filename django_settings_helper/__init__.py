@@ -22,6 +22,8 @@ def get_env(key, strict=False, default=None, type_cast=str):
     value = os.environ.get(key=key, default=default)
     if type_cast == bool and value.capitalize() in ('True', 'False', 'Yes', 'No', '1', '0', 'On', 'Off'):
         return value.capitalize() in ('True', 'Yes', '1', 'On')
+    elif type_cast == list:
+        return [x.strip() for x in value.split(',')]
     return type_cast(value)
 
 
