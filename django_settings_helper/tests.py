@@ -53,7 +53,7 @@ class TestDjangoSettingsHelper(unittest.TestCase):
             test_key = 'TEST_%d' % idx
             eval_val = case[1]
             test_type = case[2]
-            test_val = django_settings_helper.get_env(test_key, strict=True, type_cast=test_type)
+            test_val = django_settings_helper.get_env(test_key, strict=False, type_cast=test_type)
 
             assert_object_equal(eval_val, test_val)
 
@@ -63,8 +63,10 @@ class TestDjangoSettingsHelper(unittest.TestCase):
             exception_raised = False
         except django_settings_helper.ImproperlyConfigured:
             exception_raised = True
-
         self.assertTrue(exception_raised)
+
+        # getting default values
+        django_settings_helper.get_env('UNKNOWN_TEST_VALUE', strict=False, default=True, type_cast=bool)
 
     def test_env_from_file(self):
         """
@@ -94,5 +96,5 @@ class TestDjangoSettingsHelper(unittest.TestCase):
         )
 
     def test_import_all(self):
-        django_settings_helper.import_all('django.seettings.helper.test_import', globals())
+        django_settings_helper.import_all('django_settings_helper.test_import', globals())
         self.assertEqual(IMPORT_TEST_VALUE, 'successfully imported!')

@@ -21,7 +21,7 @@ def get_env(key, strict=False, default=None, type_cast=str):
     if strict and key not in os.environ:
         raise ImproperlyConfigured('Key \'{}\' not found in the environment variables'.format(key))
 
-    value = os.getenv(key, default)
+    value = str(os.getenv(key, default))
     if type_cast == bool and value.capitalize() in ('True', 'False', 'Yes', 'No', '1', '0', 'On', 'Off'):
         return value.capitalize() in ('True', 'Yes', '1', 'On')
     elif type_cast in (list, dict):
