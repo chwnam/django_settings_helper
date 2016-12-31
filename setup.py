@@ -6,7 +6,7 @@ from setuptools import find_packages, setup
 setup(
     name='django_settings_helper',
 
-    version='1.0.2',
+    version='1.0.3',
 
     url='https://github.com/chwnam/django_settings_helper',
 
