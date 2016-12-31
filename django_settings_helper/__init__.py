@@ -7,7 +7,9 @@ except ImportError:
     class ImproperlyConfigured(Exception):
         pass
 
+from ast import literal_eval
 from importlib import import_module
+from json import loads
 from re import compile as re_compile
 
 var_expr = re_compile(
@@ -19,12 +21,15 @@ def get_env(key, strict=False, default=None, type_cast=str):
     if strict and key not in os.environ:
         raise ImproperlyConfigured('Key \'{}\' not found in the environment variables'.format(key))
 
-    value = os.environ.get(key=key, default=default)
+    value = os.getenv(key, default)
     if type_cast == bool and value.capitalize() in ('True', 'False', 'Yes', 'No', '1', '0', 'On', 'Off'):
         return value.capitalize() in ('True', 'Yes', '1', 'On')
-    elif type_cast == list:
-        return [x.strip() for x in value.split(',')]
-    return type_cast(value)
+    elif type_cast in (list, dict):
+        return literal_eval(value)
+    elif type_cast == 'json':
+        return loads(value)
+    else:
+        return type_cast(value)
 
 
 def env_from_file(path):
@@ -38,7 +43,12 @@ def env_from_file(path):
                 continue
             groups = matched.groupdict()
             key = matched.groupdict().get('k')
-            val = groups.get('v1') or groups.get('v2') or groups.get('v3')
+            if groups.get('v1'):
+                val = groups.get('v1').strip('\"')
+            elif groups.get('v2'):
+                val = groups.get('v2').strip('\'')
+            else:
+                val = groups.get('v3')
             if key and val:
                 os.environ.setdefault(key, val)
 
