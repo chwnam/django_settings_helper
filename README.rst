@@ -11,7 +11,7 @@ Simple Usage
 
 get_env
 ~~~~~~~
-get_env gets environment variables by keys, and cast into types other than string, such as integer, or boolean.
+get_env gets environment variables by keys, and cast into types other than string, such as integer, or boolean::
 
     foo = get_env('foo')  # read 'foo'. When not found, None is returned
 
@@ -33,7 +33,6 @@ get_env gets environment variables by keys, and cast into types other than strin
     dict_cast = get_env('DICT_CAST', type_cast=dict)
     json_load = get_env('JSON_LOAD', type_cast='json')
 
-
 env_from_file
 ~~~~~~~~~~~~~
 env_from_file() reads environment variables from path.
@@ -42,7 +41,7 @@ Variables should be declared with 'export' keyword, e.g.) export FOO=BAR
 
 import_all
 ~~~~~~~~~~
-import_all imports other packages' variables.
+import_all imports other packages' variables::
 
     # file: x.y.z_pkg.py
     def test():
