@@ -12,9 +12,7 @@ from importlib import import_module
 from json import loads
 from re import compile as re_compile
 
-var_expr = re_compile(
-    r'\s*export\s+(?P<k>.+?)=(((?=\")(?P<v1>.+)(?<=\"))|((?=\')(?P<v2>.+)(?<=\'))|(?P<v3>.+?))\s*((?=#)(?P<c>.*))?$'
-)
+var_expr = re_compile(r'^\s*(?<!#)\s*export\s+(?P<k>.+?)=(((?=\")(?P<v1>.+)(?<=\"))|((?=\')(?P<v2>.+)(?<=\'))|(?P<v3>.+?))\s*((?=#)(?P<c>.*))?$')
 
 
 def get_env(key, strict=False, default=None, type_cast=str):

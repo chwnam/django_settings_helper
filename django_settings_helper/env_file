@@ -9,3 +9,6 @@ export TEST_VAR_02=My Value # This comment is also skipped
 export secret_key="res#passlikePa!4n"  # a sharp character (#) is included in the string which is enclosed by double quotes
 
 export quote_test='#QUOTE_#TEST_#VAL' # comment
+
+# export must_be_skipped_1=failed.
+  #    export must_be_skipped_2=failed.

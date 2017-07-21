@@ -95,6 +95,10 @@ class TestDjangoSettingsHelper(unittest.TestCase):
             django_settings_helper.get_env('quote_test', strict=True),
         )
 
+        self.assertFalse(django_settings_helper.get_env('must_be_skipped_1', strict=False, default=False, type_cast=bool))
+        self.assertFalse(django_settings_helper.get_env('must_be_skipped_2', strict=False, default=False, type_cast=bool))
+
     def test_import_all(self):
         django_settings_helper.import_all('django_settings_helper.test_import', globals())
+        # noinspection PyUnresolvedReferences
         self.assertEqual(IMPORT_TEST_VALUE, 'successfully imported!')
